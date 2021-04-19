@@ -245,9 +245,9 @@ class Invoice
 
             $template = sprintf('invoices::templates.%s', $this->template);
             $view     = View::make($template, ['invoice' => $this]);
-            $html     = mb_convert_encoding($view, 'HTML-ENTITIES', 'UTF-8');
+            $this->html     = mb_convert_encoding($view, 'HTML-ENTITIES', 'UTF-8');
 
-            $this->pdf    = PDF::setOptions(['enable_php' => true])->loadHtml($html);
+            $this->pdf    = PDF::setOptions(['enable_php' => true])->loadHtml($this->html);
             $this->output = $this->pdf->output();
         }
 
